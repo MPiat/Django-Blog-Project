@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <!-- CSS -->
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Jura|Orbitron" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<!--
+
+    font-family: 'Jura', sans-serif;
+
+    font-family: 'Orbitron', sans-serif;
+
+-->
+
+
+    <!--Medium Style Editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+    <title>Blog</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg  techfont  navbar-dark bg-primary">
+      <div class="container">
+        <ul class="nav navbar-nav ">
+          <li><a class="navbar-brand bigbrand" href="{% url 'blogpost_list' %}">Blog</a></li>
+          <li class="nav-item active"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+          <li class="nav-item active"><a class="nav-link" href="https://github.com/MPiat">Github</a></li>
+        </ul>
+
+
+          <ul class="nav navbar-nav bar-right">
+          {% if user.is_authenticated %}
+
+            <li class="nav-item active"><a  class="nav-link" href="{% url 'post_new' %}">New Post</a></li>
+            <li class="nav-item active"><a  class="nav-link" href="{% url 'logout' %}">Log Out</a></li>
+            <li class="nav-item active navbar-brand bigbrand">Welcome: {{user.username}}</li>
+
+          {% else %}
+            <li><a class="nav navbar-right" href="{% url 'login' %}"><i class="fas fa-user fa-3x" style="color:#ffffff"></i></a></li>
+          {% endif  %}
+
+        </ul>
+      </div>
+    </nav>
+    <!-- Content Block -->
+    <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="blog_posts">
+              {% block content %}
+              {% endblock %}
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+  </body>
+</html>
